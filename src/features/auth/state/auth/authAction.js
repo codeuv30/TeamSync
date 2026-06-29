@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../../config/axiosInstance";
 import { setError } from "./authSlice";
+import { addEmployee } from "./authSlice";
 
 export const loginEmployee = createAsyncThunk(
   "auth/login",
@@ -35,6 +36,8 @@ export const currentLoggedIn = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const response = await axiosInstance.get("/auth/me");
+
+      thunkApi.dispatch(addEmployee(response.data.user));
 
       return response.data.user;
     } catch (error) {
