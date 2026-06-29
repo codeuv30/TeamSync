@@ -95,7 +95,7 @@ const TopNav = () => {
   const isActive = employee?.status === "active";
 
   return (
-    <div className="flex justify-between items-center gap-4 font-mono border-b border-gray-500/50 w-full px-4 py-2">
+    <div className="flex justify-between items-center gap-4 font-mono border-b border-gray-500/50 w-full px-4 py-2 bg-[#c7c7c7]" style={{ background: dark ? "#0F0D13" : "#e0e0e0" }}>
       {/* Search */}
       <div ref={searchWrapperRef} className="relative w-full max-w-85">
         <div className="relative">
