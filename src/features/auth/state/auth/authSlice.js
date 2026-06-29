@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { currentLoggedIn, loginEmployee } from "./authAction";
+import { currentLoggedIn, loginEmployee, registerEmployee } from "./authAction";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     employee: null,
     isLoading: false,
+    error: null,
   },
   reducers: {
     addEmployee: (state, action) => {
@@ -16,9 +17,13 @@ const authSlice = createSlice({
       state.employee = null;
       state.isLoading = false;
     },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
+      /* Login */
       .addCase(loginEmployee.pending, (state) => {
         state.isLoading = true;
       })
@@ -29,6 +34,20 @@ const authSlice = createSlice({
       .addCase(loginEmployee.rejected, (state, action) => {
         state.isLoading = false;
       })
+
+      /* Register */
+      .addCase(registerEmployee.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(registerEmployee.fulfilled, (state, action) => {
+        state.employee = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(registerEmployee.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+
+      /* Currently Logged In */
       .addCase(currentLoggedIn.pending, (state) => {
         state.isLoading = true;
       })
@@ -42,5 +61,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { addEmployee, removeEmployee } = authSlice.actions;
+export const { addEmployee, removeEmployee, setError } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { loginEmployee } from "../state/auth/authAction";
+import { loginEmployee, registerEmployee } from "../state/auth/authAction";
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export const useAuth = () => {
   } = useForm({
     mode: "onTouched",
     defaultValues: {
-      fullName: "",
+      name: "",
       email: "",
       password: "",
       terms: false,
@@ -22,7 +22,7 @@ export const useAuth = () => {
   });
 
   const onRegisterSubmit = (data) => {
-    console.log(data);
+    dispatch(registerEmployee(data));
   };
 
   const onLoginSubmit = (data) => {
