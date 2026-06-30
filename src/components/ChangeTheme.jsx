@@ -1,10 +1,15 @@
 import { Moon, Sun } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { toogleTheme } from "../../src/shared/state/themeSlice";
+import { useEffect } from "react";
 
 const ChangeTheme = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.mode);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
 
   return (
     <button

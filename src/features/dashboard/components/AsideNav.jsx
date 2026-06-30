@@ -15,17 +15,17 @@ const AsideNav = () => {
   const theme = useSelector((state) => state.theme.mode);
   const dark = theme === "dark";
 
-  const employee = useSelector(state => state.auth.employee);
+  const employee = useSelector((state) => state.auth.employee);
 
   const NAV_ITEMS = employee.role === "admin" ? [...AdminNavigation] : [...EmployeeNavigation];
 
   return (
     <aside
-      className="h-full w-full font-mono pt-4 border-r border-gray-500/70"
+      className="h-full w-full flex flex-col border-r border-gray-500/70"
       style={{ background: dark ? "#16131e" : "#ffffff" }}
     >
-      <div className="h-[10.5%] w-full pl-4 border-b border-gray-500/70">
-        <h1 className="text-3xl font-semibold text-[var(--primary)]">
+      <div className="shrink-0 w-full pt-4 pb-4 pl-4 border-b border-gray-500/70">
+        <h1 className="text-3xl font-semibold text-[#4f46e5]">
           TeamSync
         </h1>
         <p
@@ -36,12 +36,10 @@ const AsideNav = () => {
         </p>
       </div>
 
-      <div className="h-full w-full pt-3">
-        <div className="h-full w-full flex flex-col items-start">
-          {NAV_ITEMS.map(({ to, label, Icon }) => (
-            <NavigationTab path={to} title={label} Icon={Icon} dark={dark} />
-          ))}
-        </div>
+      <div className="flex-1 min-h-0 w-full pt-3 flex flex-col items-start">
+        {NAV_ITEMS.map(({ to, label, Icon }) => (
+          <NavigationTab key={to} path={to} title={label} Icon={Icon} dark={dark} />
+        ))}
       </div>
     </aside>
   );

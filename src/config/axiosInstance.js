@@ -19,11 +19,8 @@ axiosInstance.interceptors.response.use(
 
                 originalRequest._retry = true;
 
-                window.location.href = "/home";
-
                 return originalRequest;
             } catch (error) {
-                window.location.href = "/";
                 return Promise.reject(error);
             }
         };
